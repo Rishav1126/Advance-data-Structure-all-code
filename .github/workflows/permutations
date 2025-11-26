@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans=new ArrayList<>();
+        ArrayList<Integer> temp=new ArrayList<>();
+        boolean [] isVisited=new boolean[nums.length];
+        perm(nums,ans,temp,isVisited);
+        return ans;
+    }
+    private static void perm(int [] nums,List<List<Integer>> ans,ArrayList<Integer> temp,boolean []isVisited){
+        int n=nums.length;
+        if(temp.size()==n){
+            ArrayList<Integer> res=new ArrayList<>(temp);
+            ans.add(res);
+        }
+        for(int i=0;i<n;i++){
+            if(isVisited[i]==true) continue;
+            isVisited[i]=true;
+            temp.add(nums[i]);
+            perm(nums,ans,temp,isVisited);
+            isVisited[i]=false;
+            temp.remove(temp.size()-1);
+        }
+    }
+}
