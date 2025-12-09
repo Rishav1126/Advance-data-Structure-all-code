@@ -1,0 +1,29 @@
+import java.util.*;
+
+class Solution {
+    public List<String> validStrings(int n) {
+        List<String> result = new ArrayList<>();
+        backtrack(n, "", result);
+        return result;
+    }
+
+    private void backtrack(int n, String current, List<String> result) {
+        if (current.length() == n) {
+            result.add(current);
+            return;
+        }
+
+        // Always can add '1'
+        backtrack(n, current + "1", result);
+
+        // Add '0' only if last char isn't '0'
+        if (current.length() == 0 || current.charAt(current.length() - 1) != '0') {
+            backtrack(n, current + "0", result);
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        System.out.println(s.validStrings(3));
+    }
+}
